@@ -12,7 +12,7 @@
         [
             'name' => 'Roles',
             'icon' => 'fa-solid fa-shield-halved',
-            'href' => route('admin.dashboard'),
+            'href' => route('admin.roles.index'),
             'active' => request()->routeIs('admin.roles.*'),
         ],
         [
