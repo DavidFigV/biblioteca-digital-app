@@ -2,74 +2,76 @@
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title }}</title>
+        <title>{{ $title }}</title>
 
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-i1N9oV3Dnxz5HnfG0sWdCCrq5v8SxXvA3A7a1e4uBcUXBLp6I7VXe6X1+5+BlgI3RucA0Cl2f9nnH4yV0b8HgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://kit.fontawesome.com/6f74026cec.js" crossorigin="anonymous"></script>
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- WireUI -->
+        <x-wire-scripts />
+        <!-- Styles -->
+        @livewireStyles
+    </head>
+    <body class="font-sans antialiased bg-gray-50">
+        @include('layouts.includes.admin.navigation')
+        @include('layouts.includes.admin.sidebar')
 
-    @livewireStyles
-    <wireui:scripts />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body class="font-sans antialiased bg-gray-50">
-    @include('layouts.includes.admin.navigation')
-    @include('layouts.includes.admin.sidebar')
+        <div class="p-4 sm:ml-64">
+            <div class="mt-14 flex items-center justify-between w-full">
+                @include('layouts.includes.admin.breadcrumb', ['title' => $title, 'breadcrumbs' => $breadcrumbs])
 
-    <div class="p-4 sm:ml-64">
-        <div class="mt-14 flex items-center justify-between w-full">
-            @include('layouts.includes.admin.breadcrumb', ['title' => $title, 'breadcrumbs' => $breadcrumbs])
+                @isset($action)
+                    <div>
+                        {{ $action }}
+                    </div>
+                @endisset
+            </div>
 
-            @isset($action)
-                <div>
-                    {{ $action }}
-                </div>
-            @endisset
+            <div class="mt-6">
+                {{ $slot }}
+            </div>
         </div>
 
-        <div class="mt-6">
-            {{ $slot }}
-        </div>
-    </div>
+        @stack('modals')
+        @livewireScripts
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
-    @stack('modals')
-    @livewireScripts
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+        @if (session('swal'))
+            <script>
+                Swal.fire(@json(session('swal')));
+            </script>
+        @endif
 
-    @if (session('swal'))
         <script>
-            Swal.fire(@json(session('swal')));
-        </script>
-    @endif
-
-    <script>
-        document.querySelectorAll('.delete-form').forEach(form => {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: 'No podrás revertir esto.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
+            document.querySelectorAll('.delete-form').forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: 'No podrás revertir esto.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
                 });
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
