@@ -24,13 +24,13 @@
         [
             'name' => 'Categorías',
             'icon' => 'fa-solid fa-folder-tree',
-            'href' => route('admin.dashboard'),
+            'href' => route('admin.categories.index'),
             'active' => request()->routeIs('admin.categories.*'),
         ],
         [
             'name' => 'Ebooks',
             'icon' => 'fa-solid fa-book',
-            'href' => route('admin.dashboard'),
+            'href' => route('admin.ebooks.index'),
             'active' => request()->routeIs('admin.ebooks.*'),
         ],
     ];

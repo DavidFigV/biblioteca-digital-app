@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\EbookSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
+            CategorySeeder::class,
+            EbookSeeder::class,
         ]);
     }
 }
