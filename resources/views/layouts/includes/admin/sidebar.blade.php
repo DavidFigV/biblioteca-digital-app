@@ -18,7 +18,7 @@
         [
             'name' => 'Usuarios',
             'icon' => 'fa-solid fa-users',
-            'href' => route('admin.dashboard'),
+            'href' => route('admin.users.index'),
             'active' => request()->routeIs('admin.users.*'),
         ],
         [

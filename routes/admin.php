@@ -4,13 +4,16 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\EbookController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->name('dashboard');
+Route::middleware('role:admin|staff')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('categories', CategoryController::class)->except('show');
+    Route::resource('ebooks', EbookController::class)->except('show');
+});
 
-Route::resource('roles', RoleController::class)->except('show');
-Route::resource('users', UserController::class)->except('show');
-Route::resource('categories', CategoryController::class)->except('show');
-Route::resource('ebooks', EbookController::class)->except('show');
+Route::middleware('role:admin')->group(function () {
+    Route::resource('roles', RoleController::class)->except('show');
+    Route::resource('users', UserController::class)->except('show');
+});

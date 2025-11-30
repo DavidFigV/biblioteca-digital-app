@@ -8,9 +8,20 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $user = auth()->user();
+
+        if ($user?->hasRole(['admin', 'staff'])) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        $ebooks = \App\Models\Ebook::with('category')
+            ->where('is_active', true)
+            ->latest()
+            ->paginate(8);
+
+        return view('dashboard', compact('ebooks'));
     })->name('dashboard');
 });
 
-Route::redirect('/', '/admin');
+Route::redirect('/', '/dashboard');
 Route::redirect('/admin', '/admin/dashboard');

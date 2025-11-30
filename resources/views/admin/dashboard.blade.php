@@ -7,6 +7,13 @@
     $recentUsers = \App\Models\User::latest()->take(5)->get();
 @endphp
 
+@php
+    $usersCount = $stats['users'] ?? 0;
+    $rolesCount = $stats['roles'] ?? 0;
+    $categoriesCount = $stats['categories'] ?? 0;
+    $ebooksCount = $stats['ebooks'] ?? 0;
+@endphp
+
 <x-admin-layout title="Dashboard | {{ config('app.name') }}" :breadcrumbs="[['name' => 'Dashboard']]">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-white shadow-sm rounded-lg border border-gray-200 p-5">

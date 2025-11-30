@@ -18,7 +18,7 @@
         <!-- SweetAlert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- WireUI -->
-        <x-wire-scripts />
+        <wireui:scripts />
         <!-- Styles -->
         @livewireStyles
     </head>
