@@ -1,4 +1,4 @@
-<x-admin-layout title="Editar usuario | {{ config('app.name') }}" :breadcrumbs="[['name' => 'Usuarios', 'href' => route('admin.users.index')], ['name' => 'Editar']]">
+<x-admin-layout title="Editar usuario | {{ config('app.name') }}" :breadcrumbs="[['name' => 'Dashboard','href' => route('admin.dashboard')],['name' => 'Usuarios', 'href' => route('admin.users.index')], ['name' => 'Editar']]">
     <div class="max-w-4xl mx-auto bg-white shadow-sm rounded-lg border border-gray-200 p-6 space-y-4">
         <h1 class="text-xl font-semibold text-gray-900">Editar usuario</h1>
 

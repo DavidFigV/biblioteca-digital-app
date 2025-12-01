@@ -1,4 +1,4 @@
-<x-admin-layout title="Editar categoría | {{ config('app.name') }}" :breadcrumbs="[['name' => 'Categorías', 'href' => route('admin.categories.index')], ['name' => 'Editar']]">
+<x-admin-layout title="Editar categoría | {{ config('app.name') }}" :breadcrumbs="[['name' => 'Dashboard','href' => route('admin.dashboard')],['name' => 'Categorías', 'href' => route('admin.categories.index')], ['name' => 'Editar']]">
     <div class="max-w-3xl mx-auto bg-white shadow-sm rounded-lg border border-gray-200 p-6 space-y-4">
         <h1 class="text-xl font-semibold text-gray-900">Editar categoría</h1>
 

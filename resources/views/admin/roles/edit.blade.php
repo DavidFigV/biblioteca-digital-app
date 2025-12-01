@@ -1,4 +1,4 @@
-<x-admin-layout title="Editar rol | {{ config('app.name') }}" :breadcrumbs="[['name' => 'Roles', 'href' => route('admin.roles.index')], ['name' => 'Editar']]">
+<x-admin-layout title="Editar rol | {{ config('app.name') }}" :breadcrumbs="[['name' => 'Dashboard','href' => route('admin.dashboard')],['name' => 'Roles', 'href' => route('admin.roles.index')], ['name' => 'Editar']]">
     <div class="max-w-3xl mx-auto bg-white shadow-sm rounded-lg border border-gray-200 p-6 space-y-4">
         <h1 class="text-xl font-semibold text-gray-900">Editar rol</h1>
 

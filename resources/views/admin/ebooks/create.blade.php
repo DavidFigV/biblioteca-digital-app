@@ -1,4 +1,4 @@
-<x-admin-layout title="Crear ebook | {{ config('app.name') }}" :breadcrumbs="[['name' => 'Ebooks', 'href' => route('admin.ebooks.index')], ['name' => 'Crear']]">
+<x-admin-layout title="Crear ebook | {{ config('app.name') }}" :breadcrumbs="[['name' => 'Dashboard','href' => route('admin.dashboard')],['name' => 'Ebooks', 'href' => route('admin.ebooks.index')], ['name' => 'Crear']]">
     <div class="max-w-4xl mx-auto bg-white shadow-sm rounded-lg border border-gray-200 p-6 space-y-4">
         <h1 class="text-xl font-semibold text-gray-900">Nuevo ebook</h1>
 
