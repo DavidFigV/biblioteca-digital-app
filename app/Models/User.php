@@ -4,8 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -69,5 +71,26 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Auto-assign a unique member number if not provided.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function (User $user) {
+            if (empty($user->member_number)) {
+                $user->member_number = static::generateMemberNumber();
+            }
+        });
+    }
+
+    protected static function generateMemberNumber(): string
+    {
+        do {
+            $number = 'MBR-'.str_pad((string) random_int(1, 999999), 6, '0', STR_PAD_LEFT);
+        } while (static::where('member_number', $number)->exists());
+
+        return $number;
     }
 }

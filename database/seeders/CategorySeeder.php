@@ -17,6 +17,10 @@ class CategorySeeder extends Seeder
             ['name' => 'No ficción', 'description' => 'Ensayos, biografías, divulgación'],
             ['name' => 'Tecnología', 'description' => 'Programación, software, hardware'],
             ['name' => 'Educación', 'description' => 'Material académico y de estudio'],
+            ['name' => 'Ciencia', 'description' => 'Divulgación científica y técnica'],
+            ['name' => 'Historia', 'description' => 'Ensayos históricos y biografías'],
+            ['name' => 'Arte', 'description' => 'Arte, diseño, fotografía'],
+            ['name' => 'Infantil', 'description' => 'Libros para niños y jóvenes'],
         ];
 
         foreach ($categories as $category) {

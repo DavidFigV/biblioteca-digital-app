@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -13,37 +14,51 @@ class UserSeeder extends Seeder
 
     public function run(): void
     {
-        $admin = User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@biblioteca.com',
-            'password' => Hash::make('password'),
-            'member_number' => 'ADM-001',
-            'phone' => '555-000-0001',
-            'address' => 'Sede Central',
-            'is_active' => true,
-        ]);
-        $admin->syncRoles(['admin']);
+        $adminRole = Role::findByName('admin');
+        $staffRole = Role::findByName('staff');
+        $clientRole = Role::findByName('client');
 
-        $staff = User::create([
-            'name' => 'Staff User',
-            'email' => 'staff@biblioteca.com',
-            'password' => Hash::make('password'),
-            'member_number' => 'STF-001',
-            'phone' => '555-000-0002',
-            'address' => 'Sucursal Centro',
-            'is_active' => true,
-        ]);
-        $staff->syncRoles(['staff']);
+        $admin = User::updateOrCreate(
+            ['email' => 'admin@biblioteca.com'],
+            [
+                'name' => 'Admin User',
+                'password' => Hash::make('password'),
+                'member_number' => 'ADM-001',
+                'phone' => '555-000-0001',
+                'address' => 'Sede Central',
+                'is_active' => true,
+            ]
+        );
+        $admin->syncRoles([$adminRole]);
 
-        $client = User::create([
-            'name' => 'Client User',
-            'email' => 'client@biblioteca.com',
-            'password' => Hash::make('password'),
-            'member_number' => 'CLT-001',
-            'phone' => '555-000-0003',
-            'address' => 'Sucursal Norte',
-            'is_active' => true,
-        ]);
-        $client->syncRoles(['client']);
+        $staff = User::updateOrCreate(
+            ['email' => 'staff@biblioteca.com'],
+            [
+                'name' => 'Staff User',
+                'password' => Hash::make('password'),
+                'member_number' => 'STF-001',
+                'phone' => '555-000-0002',
+                'address' => 'Sucursal Centro',
+                'is_active' => true,
+            ]
+        );
+        $staff->syncRoles([$staffRole]);
+
+        $client = User::updateOrCreate(
+            ['email' => 'client@biblioteca.com'],
+            [
+                'name' => 'Client User',
+                'password' => Hash::make('password'),
+                'member_number' => 'CLT-001',
+                'phone' => '555-000-0003',
+                'address' => 'Sucursal Norte',
+                'is_active' => true,
+            ]
+        );
+        $client->syncRoles([$clientRole]);
+
+        User::factory(2)->create()->each(fn ($u) => $u->assignRole($adminRole));
+        User::factory(4)->create()->each(fn ($u) => $u->assignRole($staffRole));
+        User::factory(9)->create()->each(fn ($u) => $u->assignRole($clientRole));
     }
 }

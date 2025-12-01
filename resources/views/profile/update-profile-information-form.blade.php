@@ -81,6 +81,27 @@
                 @endif
             @endif
         </div>
+
+        <!-- Member Number -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="member_number" value="Número de miembro" />
+            <x-input id="member_number" type="text" class="mt-1 block w-full" wire:model="state.member_number" autocomplete="off" disabled />
+            <p class="text-xs text-gray-500 mt-1">Asignado automáticamente. Contacta a un administrador para cambios.</p>
+        </div>
+
+        <!-- Phone -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="phone" value="Teléfono" />
+            <x-input id="phone" type="text" class="mt-1 block w-full" wire:model="state.phone" autocomplete="tel" />
+            <x-input-error for="phone" class="mt-2" />
+        </div>
+
+        <!-- Address -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="address" value="Dirección" />
+            <x-input id="address" type="text" class="mt-1 block w-full" wire:model="state.address" autocomplete="street-address" />
+            <x-input-error for="address" class="mt-2" />
+        </div>
     </x-slot>
 
     <x-slot name="actions">

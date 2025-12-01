@@ -37,10 +37,10 @@ class EbookSeeder extends Seeder
         ];
 
         foreach ($items as $item) {
-            $category = Category::where('name', $item['category'])->first();
-            if (! $category) {
-                continue;
-            }
+            $category = Category::firstOrCreate(
+                ['name' => $item['category']],
+                ['description' => $item['category']]
+            );
 
             Ebook::create([
                 'category_id' => $category->id,
@@ -54,5 +54,15 @@ class EbookSeeder extends Seeder
                 'is_active' => true,
             ]);
         }
+
+        $categoryIds = Category::pluck('id');
+
+        Ebook::factory(25)->state(function () use ($categoryIds) {
+            return [
+                'category_id' => $categoryIds->isNotEmpty()
+                    ? $categoryIds->random()
+                    : Category::factory(),
+            ];
+        })->create();
     }
 }

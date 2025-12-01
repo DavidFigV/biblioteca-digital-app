@@ -20,9 +20,9 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <x-label for="member_number" value="Número de miembro (opcional)" />
-                    <x-input id="member_number" name="member_number" type="text" class="mt-1 block w-full" value="{{ old('member_number', $user->member_number) }}" />
-                    <x-input-error for="member_number" class="mt-2" />
+                    <x-label for="member_number" value="Número de miembro" />
+                    <x-input id="member_number" name="member_number" type="text" class="mt-1 block w-full" value="{{ old('member_number', $user->member_number) }}" disabled />
+                    <p class="text-xs text-gray-500 mt-1">Asignado automáticamente</p>
                 </div>
                 <div class="flex items-center gap-2 mt-6">
                     <x-checkbox id="is_active" name="is_active" @checked(old('is_active', $user->is_active)) />
@@ -40,18 +40,6 @@
                     <x-label for="address" value="Dirección (opcional)" />
                     <x-input id="address" name="address" type="text" class="mt-1 block w-full" value="{{ old('address', $user->address) }}" />
                     <x-input-error for="address" class="mt-2" />
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <x-label for="password" value="Contraseña (opcional)" />
-                    <x-input id="password" name="password" type="password" class="mt-1 block w-full" />
-                    <x-input-error for="password" class="mt-2" />
-                </div>
-                <div>
-                    <x-label for="password_confirmation" value="Confirmar contraseña" />
-                    <x-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" />
                 </div>
             </div>
 
