@@ -26,7 +26,6 @@ class UserSeeder extends Seeder
                 'member_number' => 'ADM-001',
                 'phone' => '555-000-0001',
                 'address' => 'Sede Central',
-                'is_active' => true,
             ]
         );
         $admin->syncRoles([$adminRole]);
@@ -39,7 +38,6 @@ class UserSeeder extends Seeder
                 'member_number' => 'STF-001',
                 'phone' => '555-000-0002',
                 'address' => 'Sucursal Centro',
-                'is_active' => true,
             ]
         );
         $staff->syncRoles([$staffRole]);
@@ -52,7 +50,6 @@ class UserSeeder extends Seeder
                 'member_number' => 'CLT-001',
                 'phone' => '555-000-0003',
                 'address' => 'Sucursal Norte',
-                'is_active' => true,
             ]
         );
         $client->syncRoles([$clientRole]);

@@ -28,10 +28,8 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'member_number' => ['nullable', 'string', 'max:50', 'unique:users,member_number'],
             'phone' => ['nullable', 'string', 'max:30'],
             'address' => ['nullable', 'string', 'max:255'],
-            'is_active' => ['sometimes', 'boolean'],
             'role' => ['required', 'exists:roles,name'],
         ]);
 
@@ -39,10 +37,8 @@ class UserController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'member_number' => $validated['member_number'] ?? null,
             'phone' => $validated['phone'] ?? null,
             'address' => $validated['address'] ?? null,
-            'is_active' => $request->boolean('is_active', true),
         ]);
 
         $user->syncRoles([$validated['role']]);
@@ -73,7 +69,6 @@ class UserController extends Controller
             'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'phone' => ['nullable', 'string', 'max:30'],
             'address' => ['nullable', 'string', 'max:255'],
-            'is_active' => ['sometimes', 'boolean'],
             'role' => ['required', 'exists:roles,name'],
         ]);
 
@@ -82,7 +77,6 @@ class UserController extends Controller
             'email' => $validated['email'],
             'phone' => $validated['phone'] ?? null,
             'address' => $validated['address'] ?? null,
-            'is_active' => $request->boolean('is_active', true),
         ];
 
         $user->update($data);

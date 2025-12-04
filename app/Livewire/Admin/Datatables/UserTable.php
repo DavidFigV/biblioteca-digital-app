@@ -30,8 +30,6 @@ class UserTable extends DataTableComponent
             Column::make('Número de miembro', 'member_number')->sortable()->searchable(),
             Column::make('Rol')
                 ->label(fn (User $user) => $user->roles->pluck('name')->implode(', ') ?: '-'),
-            Column::make('Estado')
-                ->label(fn (User $user) => $user->is_active ? 'Activo' : 'Inactivo'),
             Column::make('Acciones')
                 ->label(fn (User $user) => view('admin.users.actions', ['user' => $user]))
                 ->html(),

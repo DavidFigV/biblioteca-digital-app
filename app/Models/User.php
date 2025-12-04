@@ -35,7 +35,6 @@ class User extends Authenticatable
         'member_number',
         'phone',
         'address',
-        'is_active',
         'password',
     ];
 

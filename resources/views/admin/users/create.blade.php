@@ -18,27 +18,32 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <x-label for="member_number" value="Número de miembro (opcional)" />
-                    <x-input id="member_number" name="member_number" type="text" class="mt-1 block w-full" value="{{ old('member_number') }}" />
-                    <x-input-error for="member_number" class="mt-2" />
+                <div class="bg-gray-50 border border-gray-200 rounded-md p-3">
+                    <p class="text-sm text-gray-700 font-medium">Número de miembro</p>
+                    <p class="text-sm text-gray-500 mt-1">Se asigna automáticamente al crear el usuario.</p>
                 </div>
-                <div class="flex items-center gap-2 mt-6">
-                    <x-checkbox id="is_active" name="is_active" checked />
-                    <x-label for="is_active" value="Activo" />
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <x-label for="phone" value="Teléfono (opcional)" />
                     <x-input id="phone" name="phone" type="text" class="mt-1 block w-full" value="{{ old('phone') }}" />
                     <x-input-error for="phone" class="mt-2" />
                 </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <x-label for="address" value="Dirección (opcional)" />
                     <x-input id="address" name="address" type="text" class="mt-1 block w-full" value="{{ old('address') }}" />
                     <x-input-error for="address" class="mt-2" />
+                </div>
+                <div>
+                    <x-label for="role" value="Rol" />
+                    <select name="role" id="role" class="mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        <option value="">Seleccione rol</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role }}" @selected(old('role') === $role)>{{ ucfirst($role) }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error for="role" class="mt-2" />
                 </div>
             </div>
 
@@ -52,17 +57,6 @@
                     <x-label for="password_confirmation" value="Confirmar contraseña" />
                     <x-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" required />
                 </div>
-            </div>
-
-            <div>
-                <x-label for="role" value="Rol" />
-                <select name="role" id="role" class="mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                    <option value="">Seleccione rol</option>
-                    @foreach ($roles as $role)
-                        <option value="{{ $role }}" @selected(old('role') === $role)>{{ ucfirst($role) }}</option>
-                    @endforeach
-                </select>
-                <x-input-error for="role" class="mt-2" />
             </div>
 
             <div class="flex justify-end gap-2">
